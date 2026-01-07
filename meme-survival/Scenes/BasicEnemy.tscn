@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ewhw07l0l7u8"]
+
+[ext_resource type="Script" uid="uid://cweol7ey2g2le" path="res://Scripts/CharEnemy1.cs" id="1_62su4"]
+[ext_resource type="Texture2D" uid="uid://cib367gui8hso" path="res://Assets/CharEnemy1.png" id="1_lns33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62su4"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4aeph"]
+radius = 21.023796
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+script = ExtResource("1_62su4")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("CircleShape2D_62su4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lns33")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_4aeph")
+
+[connection signal="body_entered" from="Hitbox" to="." method="HitboxBodyEntered"]
