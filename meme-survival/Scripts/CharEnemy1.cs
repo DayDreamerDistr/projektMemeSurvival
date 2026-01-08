@@ -1,11 +1,10 @@
 using Godot;
-using System;
 
 namespace MemeSurvival.Scripts;
 	
 public partial class CharEnemy1 : CharacterBody2D
 {
-	[Export] private Player _player;
+	[Export] public Player Player
 	
 	private float _speed = 150.0f;
 	public int Damage = 20;
@@ -20,7 +19,7 @@ public partial class CharEnemy1 : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		var distance = _player.GlobalPosition - GlobalPosition;
+		var distance = Player.GlobalPosition - GlobalPosition;
 		var direction = distance.Normalized();
 		
 		var velocity = direction * _speed;

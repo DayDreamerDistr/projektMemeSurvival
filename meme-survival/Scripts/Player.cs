@@ -1,15 +1,16 @@
 using Godot;
-using System;
 
 namespace MemeSurvival.Scripts;
 
 public partial class Player : CharacterBody2D
 {
 	[Export] private Label _hpLabel;
+	// To do: Vytvořit signál
+	[Signal] public delegate void PlayerDiedEventHandler();
 	
 	private const float Speed = 300.0f;
 	public int Health = 100;
-	//private float _invincibilityTime = 100.0f;
+	private bool _isDead = false;
 
 	public override void _Ready()
 	{
@@ -18,6 +19,9 @@ public partial class Player : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_isDead)
+			return;
+		
 		Vector2 velocity = Velocity;
 		
 		// To do: Změnit systémové akce na naše vlastní inputy
@@ -55,5 +59,7 @@ public partial class Player : CharacterBody2D
 	private void Die()
 	{
 		// To do: Otevřít Game Over screen
+		_isDead = true;
+		EmitSignal(SignalName.PlayerDied);
 	}
 }
