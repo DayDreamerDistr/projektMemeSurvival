@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
 	
 	private const float Speed = 300.0f;
 	public int Health = 100;
-	private bool _isDead = false;
+	public bool IsDead = false;
 
 	public override void _Ready()
 	{
@@ -19,7 +19,7 @@ public partial class Player : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_isDead)
+		if (IsDead)
 			return;
 		
 		Vector2 velocity = Velocity;
@@ -59,7 +59,7 @@ public partial class Player : CharacterBody2D
 	private void Die()
 	{
 		// To do: Otevřít Game Over screen
-		_isDead = true;
+		IsDead = true;
 		EmitSignal(SignalName.PlayerDied);
 	}
 }

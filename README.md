@@ -9,9 +9,9 @@
 
 
 
-
-
 ### Collision
+
+https://docs.godotengine.org/en/stable/tutorials/physics/physics\_introduction.html
 
 * U všech nodes co dědí z CollisionObject2D můžeš najít v Properties odrážku Collision, s tabulkou čísel. Jedná se o Collision Layers.
 * Collision Layer = vrstva, na které objekt koliduje s ostatními objekty.
@@ -23,6 +23,8 @@
 
 ### Input
 
+https://docs.godotengine.org/en/stable/tutorials/inputs/index.html
+
 * základně máš v Godotu nějaké systémové inputy (např. ui\_left, ui\_right apod.), ale v praxi se hodí vytvořit si vlastní, které si můžeš nastavit na jednu i víc kláves.
 * Project > Project Settings > v horním menu odrážka Input Map
 * Do políčka Add New Action napiš název a klikni na +Add
@@ -31,7 +33,9 @@
 
 
 
-### Signál
+### Signals
+
+https://docs.godotengine.org/en/4.4/getting\_started/step\_by\_step/signals.html
 
 * Signály jsou velice užitečné, pokud potřebuješ spustit nějaký v reakci na nějakou událost, například pokud zasáhne střela hráče, tak si má ubrat životy.
 * Vetšina nodes má vlastní signály, které se dají jednoduše propojit se skriptem.

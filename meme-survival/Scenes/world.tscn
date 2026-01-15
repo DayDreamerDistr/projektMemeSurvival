@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddxcrqjbguk2f"]
+[gd_scene load_steps=7 format=3 uid="uid://ddxcrqjbguk2f"]
 
 [ext_resource type="PackedScene" uid="uid://cbyb616av8lj0" path="res://Scenes/Player.tscn" id="1_a02cp"]
 [ext_resource type="Texture2D" uid="uid://bv28yj74qwtop" path="res://icon.svg" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://ewhw07l0l7u8" path="res://Scenes/BasicEnemy.tscn" id="3_5a7ea"]
 [ext_resource type="PackedScene" uid="uid://inpdofq86qos" path="res://Scenes/UI/HUD.tscn" id="4_8j60k"]
 [ext_resource type="PackedScene" uid="uid://cgm8pxxlbkbug" path="res://Scenes/Util/enemy_spawner.tscn" id="4_fo5ed"]
+[ext_resource type="Script" uid="uid://buvgoet1x4x40" path="res://Scripts/BulletController.cs" id="6_5ukr8"]
 
 [node name="World" type="Node2D"]
 
@@ -22,8 +23,10 @@ texture = ExtResource("2_go701")
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("4_fo5ed")]
 _player = NodePath("../Player")
 
-[node name="BasicEnemy" parent="EnemySpawner" node_paths=PackedStringArray("_player") instance=ExtResource("3_5a7ea")]
+[node name="BasicEnemy" parent="EnemySpawner" instance=ExtResource("3_5a7ea")]
 position = Vector2(1086, 299)
-_player = NodePath("../../Player")
+
+[node name="BulletController" type="Node2D" parent="."]
+script = ExtResource("6_5ukr8")
 
 [connection signal="PlayerDied" from="Player" to="HUD" method="PlayerDied"]

@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbyb616av8lj0"]
+[gd_scene load_steps=5 format=3 uid="uid://cbyb616av8lj0"]
 
 [ext_resource type="Script" uid="uid://bwmh5qtjcon7d" path="res://Scripts/Player.cs" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://5p1c8841xuyl" path="res://Assets/Char1.png" id="1_ymxaj"]
+[ext_resource type="PackedScene" uid="uid://sn4wrsfghawa" path="res://Scenes/gun.tscn" id="3_gntrk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_88kja"]
 radius = 13.038404
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_hpLabel")]
+collision_mask = 9
 script = ExtResource("1_kyqiw")
 _hpLabel = NodePath("Label")
 
@@ -26,3 +28,6 @@ offset_bottom = 46.0
 text = "HP:"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Gun" parent="." instance=ExtResource("3_gntrk")]
+position = Vector2(35, 0)

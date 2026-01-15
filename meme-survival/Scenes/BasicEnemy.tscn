@@ -10,6 +10,7 @@ radius = 13.0
 radius = 21.023796
 
 [node name="BasicEnemy" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_62su4")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -21,6 +22,7 @@ texture = ExtResource("1_lns33")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 2
+collision_mask = 5
 
 [node name="HitboxCollider" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4aeph")

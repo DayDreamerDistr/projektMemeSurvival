@@ -6,17 +6,26 @@ namespace MemeSurvival.Scripts.Util;
 public partial class EnemySpawner : Node2D
 {
     [Export] private Player _player;
+    private const string EnemyScenePath = "res://Scenes/BasicEnemy.tscn";
     
-    private Random _rdm = new();
-    public void TimerTick()
+    private void TimerTick()
     {
-        var spawnPos = _player.GlobalPosition;
-        spawnPos.X += _rdm.Next(-100, 100);
-        spawnPos.Y += _rdm.Next(-100, 100);
+        if (_player.IsDead)
+            return;
         
-        PackedScene enemyScene = GD.Load<PackedScene>("res://Scenes/BasicEnemy.tscn");
+        // Zaručíme, že se nespawne moc enemies
+        var enemies = GetChildren();
+        if (enemies.Count > 100)
+            return;
+        
+        var spawnPos = _player.GlobalPosition;
+        spawnPos.X += Random.Shared.Next(-10, 10) * 50;
+        spawnPos.Y += Random.Shared.Next(-10, 10) * 50;
+        
+        PackedScene enemyScene = GD.Load<PackedScene>(EnemyScenePath);
         CharEnemy1 enemyInstance = enemyScene.Instantiate<CharEnemy1>();
-        enemyInstance.Player = _player;
+        enemyInstance.PlayerChar = _player;
+        enemyInstance.GlobalPosition = spawnPos;
         AddChild(enemyInstance);
     }
 }
