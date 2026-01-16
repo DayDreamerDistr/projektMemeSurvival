@@ -23,7 +23,7 @@ public partial class EnemySpawner : Node2D
         spawnPos.Y += Random.Shared.Next(-10, 10) * 50;
         
         PackedScene enemyScene = GD.Load<PackedScene>(EnemyScenePath);
-        CharEnemy1 enemyInstance = enemyScene.Instantiate<CharEnemy1>();
+        BasicEnemy enemyInstance = enemyScene.Instantiate<BasicEnemy>();
         enemyInstance.PlayerChar = _player;
         enemyInstance.GlobalPosition = spawnPos;
         AddChild(enemyInstance);

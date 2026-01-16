@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ewhw07l0l7u8"]
+[gd_scene load_steps=7 format=3 uid="uid://ewhw07l0l7u8"]
 
-[ext_resource type="Script" uid="uid://cweol7ey2g2le" path="res://Scripts/CharEnemy1.cs" id="1_62su4"]
+[ext_resource type="Script" uid="uid://cweol7ey2g2le" path="res://Scripts/BasicEnemy.cs" id="1_62su4"]
 [ext_resource type="Texture2D" uid="uid://cib367gui8hso" path="res://Assets/CharEnemy1.png" id="1_lns33"]
+[ext_resource type="Shader" uid="uid://c2q0jt2u6g8dh" path="res://Shaders/BasicEnemy.gdshader" id="2_b7xc3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_62su4"]
 radius = 13.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp7c0"]
+resource_local_to_scene = true
+shader = ExtResource("2_b7xc3")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aeph"]
 radius = 21.023796
@@ -14,13 +21,16 @@ collision_layer = 8
 script = ExtResource("1_62su4")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 shape = SubResource("CircleShape2D_62su4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hp7c0")
 texture = ExtResource("1_lns33")
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 5
 

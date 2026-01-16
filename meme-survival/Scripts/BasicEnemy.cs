@@ -1,10 +1,12 @@
+using System.Threading.Tasks;
 using Godot;
 
 namespace MemeSurvival.Scripts;
 	
-public partial class CharEnemy1 : CharacterBody2D
+public partial class BasicEnemy : CharacterBody2D
 {
 	public Player PlayerChar;
+	private ShaderMaterial _shaderMaterial;
 	
 	private float _speed = 150.0f;
 	private int _damage = 20;
@@ -17,6 +19,8 @@ public partial class CharEnemy1 : CharacterBody2D
 	{
 		// To do: Získat path k player
 		PlayerChar = GetNode<Player>("../../Player");
+		var sprite = GetNode<Sprite2D>("Sprite2D");
+		_shaderMaterial = sprite.Material as ShaderMaterial;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,6 +58,24 @@ public partial class CharEnemy1 : CharacterBody2D
 		
 		var player = (Player)body; // Změníme typ body na třídu Player, abychom mohli použít metodu TakeDamage.
 		player.TakeDamage(_damage);
+	}
+	
+	public async Task FlashRed()
+	{
+		if (_shaderMaterial == null) return;
+
+		// Turn the shader flash on
+		_shaderMaterial.SetShaderParameter("active", true);
+
+		// Wait for 0.1 seconds
+		await Task.Delay(100);
+
+		// Turn the shader flash off
+		// Check if the node is still valid (not destroyed) before setting parameter
+		if (IsInstanceValid(this))
+		{
+			_shaderMaterial.SetShaderParameter("active", false);
+		}
 	}
 
 	private void Die()
