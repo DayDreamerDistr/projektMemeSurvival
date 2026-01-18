@@ -11,6 +11,8 @@ public partial class Player : CharacterBody2D
 	private const float Speed = 300.0f;
 	public int Health = 100;
 	public bool IsDead = false;
+	public int Score = 0;
+	private Vector2 _addKnockback;
 
 	public override void _Ready()
 	{
@@ -36,7 +38,8 @@ public partial class Player : CharacterBody2D
 			velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
 		}
 		
-		Velocity = velocity;
+		Velocity = velocity + _addKnockback;
+		_addKnockback = Vector2.Zero;
 		MoveAndSlide();
 	}
 
@@ -54,6 +57,12 @@ public partial class Player : CharacterBody2D
 			Health -= amount;
 		
 		_hpLabel.Text = "HP: " + Health;
+	}
+	
+	public void ProcessKnockback(Vector2 enemyPos, float force)
+	{
+		Vector2 knockbackDirection = (GlobalPosition - enemyPos).Normalized();
+		_addKnockback = knockbackDirection * force;
 	}
 
 	private void Die()

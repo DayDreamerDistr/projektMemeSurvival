@@ -9,9 +9,10 @@ font_color = Color(1, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_umhnj"]
 font_size = 32
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("_gameOverMenu")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("_gameOverMenu", "_scoreLabel")]
 script = ExtResource("1_omqfp")
 _gameOverMenu = NodePath("GameOver")
+_scoreLabel = NodePath("ScoreLabel")
 
 [node name="GameOver" type="Control" parent="."]
 visible = false
@@ -60,7 +61,7 @@ theme_override_font_sizes/font_size = 48
 text = "TRY AGAIN
 "
 
-[node name="Label" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 offset_right = 179.0
 offset_bottom = 70.0
 text = "SCORE: "

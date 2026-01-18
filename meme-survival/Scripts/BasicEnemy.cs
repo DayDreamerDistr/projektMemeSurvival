@@ -10,6 +10,7 @@ public partial class BasicEnemy : CharacterBody2D
 	
 	private float _speed = 150.0f;
 	private int _damage = 20;
+	private int _knockback = 2000;
 	public int Health = 100;
 	private bool _isDead;
 	
@@ -58,20 +59,19 @@ public partial class BasicEnemy : CharacterBody2D
 		
 		var player = (Player)body; // Změníme typ body na třídu Player, abychom mohli použít metodu TakeDamage.
 		player.TakeDamage(_damage);
+		player.ProcessKnockback(GlobalPosition, _knockback);
 	}
 	
 	public async Task FlashRed()
 	{
-		if (_shaderMaterial == null) return;
-
-		// Turn the shader flash on
+		// Zapne shader flash
 		_shaderMaterial.SetShaderParameter("active", true);
 
-		// Wait for 0.1 seconds
+		// delay aby byl vidět flash
 		await Task.Delay(100);
 
-		// Turn the shader flash off
-		// Check if the node is still valid (not destroyed) before setting parameter
+		// Vypne flash
+		// Kontrola zda je instance stále platná (mohla být mezitím smazána)
 		if (IsInstanceValid(this))
 		{
 			_shaderMaterial.SetShaderParameter("active", false);
@@ -80,6 +80,9 @@ public partial class BasicEnemy : CharacterBody2D
 
 	private void Die()
 	{
+		// Zvýší skóre hráče
+		PlayerChar.Score++;
+		
 		// Momentálně je _isDead k ničemu, ale mohlo by se hodit kdybychom chtěli spustit třeba Death Animation
 		_isDead = true;
 		QueueFree();
