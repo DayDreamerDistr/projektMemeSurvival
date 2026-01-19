@@ -20,8 +20,8 @@ public partial class Gun : Node2D
     
     public override void _Process(double delta)
     {
-        if (_player.IsDead)
-            return;
+        /*if (_player.IsDead)
+            return;*/
         
         // Jednoduchý způsob jak udělat, aby se node rotovala na určitý bod
         LookAt(GetGlobalMousePosition());

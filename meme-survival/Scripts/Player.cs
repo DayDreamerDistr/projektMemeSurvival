@@ -6,7 +6,7 @@ namespace MemeSurvival.Scripts;
 public partial class Player : CharacterBody2D
 {
     private const float Speed = 300.0f;
-
+    
     public override void _PhysicsProcess(double delta)
     {
         Vector2 velocity = Velocity;

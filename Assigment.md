@@ -10,11 +10,12 @@
 
 
 
-#### Pojmy
+#### Důležité
 
 * Editor = Godot
 * Node = jednotlivý objekt v tvém projektu (characterbody, sprite, collisionshape…)
 * scéna = ukládáš je jako soubory, obvykle více Nodes s nějakou extra logikou a setnutými parametry (Player, BasicEnemy, World…)
+* Po každém úkolu hru otestuj, že funguje jak má!
 
 
 
@@ -55,6 +56,7 @@
 
 * Nápověda:
 * Label můžeš napojit do kódu přes \[Export] (přiřadíš v editoru)
+* Pokud chceš aby se HP zobrazilo hned od začátku, můžeš pro nastavení HPLabel využít metodu **public override void \_Ready()** - volá se jednou při inicializaci node
 
 
 
@@ -65,8 +67,18 @@
 * Přidej child node Area2D a pojmenuj třeba Hitbox
 * Pod Hitbox přidej CollisionShape2D
 * Nastav shape tak, aby dával smysl
-* Nastav v properties Hitboxu v odrážce "Collision" Layer a Mask (nápověda v README, sekce Collision) 
+* Nastav v properties Hitboxu v odrážce "Collision" Layer a Mask (nápověda v README, sekce Collision)
 * Připoj signal body\_entered z Hitbox do enemy skriptu
 * Vytvoř metodu se jménem signálu (private void stačí), nezapomeň na vstupní parametr (lze najít v editoru u signálu)
 * udělej podmínku, že body je Player - nechceme útočit na ostatní enemies
 * zavolej hráči TakeDamage(damage)
+* nápověda:
+* vstupní parametr signálu je body, což je Node která vstoupila do hitboxu, body bude tím pádem player, ale abychom mohli zavolat jeho vnitřní metody, je třeba programu dát najevo, že body je player - provést explicitní konverzi typu. ([Datové typy](https://securoverse.com/csharp/data-types/data-types-overview))
+
+
+
+##### Úkol #3 - Smrt hráče
+
+* Hráč dostává damage, ale když mu klesne HP na 0 tak se nic nestane.
+* je to jednoduché, stačí přidat podmínku do TakeDamage, že když je HP 0, tak se IsDead nastaví na true.
+* Aby se hráč nemohl už pohybovat když je mrtvý, přidej na začátek PhysicsProcess check na IsDead, pokud je true => return

@@ -16,7 +16,7 @@ public partial class Hud : CanvasLayer
 
     public override void _Process(double delta)
     {
-        _scoreLabel.Text = "Score: " + _player.Score;
+        //_scoreLabel.Text = "Score: " + _player.Score;
     }
 
     private void TryAgainButtonPressed()

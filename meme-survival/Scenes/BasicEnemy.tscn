@@ -30,7 +30,6 @@ material = SubResource("ShaderMaterial_hp7c0")
 texture = ExtResource("1_lns33")
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 5
 

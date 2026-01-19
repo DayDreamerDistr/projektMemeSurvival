@@ -14,8 +14,8 @@ public partial class Bullet : Area2D
         if (body is not BasicEnemy enemy)
             return;
         
-        enemy.Health -= _damage;
+        /*enemy.Health -= _damage;
         enemy.FlashRed();
-        QueueFree();
+        QueueFree();*/
     }
 }

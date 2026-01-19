@@ -10,7 +10,7 @@ public partial class EnemySpawner : Node2D
     
     private void TimerTick()
     {
-        if (_player.IsDead)
+        /*if (_player.IsDead)
             return;
         
         // Zaručíme, že se nespawne moc enemies
@@ -26,6 +26,6 @@ public partial class EnemySpawner : Node2D
         BasicEnemy enemyInstance = enemyScene.Instantiate<BasicEnemy>();
         enemyInstance.PlayerChar = _player;
         enemyInstance.GlobalPosition = spawnPos;
-        AddChild(enemyInstance);
+        AddChild(enemyInstance);*/
     }
 }
