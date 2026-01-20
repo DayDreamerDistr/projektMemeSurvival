@@ -54,7 +54,8 @@
 
 
 
-* Nápověda:
+**Nápověda:**
+
 * Label můžeš napojit do kódu přes \[Export] (přiřadíš v editoru)
 * Pokud chceš aby se HP zobrazilo hned od začátku, můžeš pro nastavení HPLabel využít metodu **public override void \_Ready()** - volá se jednou při inicializaci node
 
@@ -62,7 +63,7 @@
 
 ##### Úkol #2 - BasicEnemy útočí
 
-* Hráč má připravenou metodu TakeDamage, ale nikdy se nevolá
+* Hráč má připravenou metodu TakeDamage, ale nikdy se nevolá.
 * V BasicEnemy Scéně:
 * Přidej child node Area2D a pojmenuj třeba Hitbox
 * Pod Hitbox přidej CollisionShape2D
@@ -70,10 +71,14 @@
 * Nastav v properties Hitboxu v odrážce "Collision" Layer a Mask (nápověda v README, sekce Collision)
 * Připoj signal body\_entered z Hitbox do enemy skriptu
 * Vytvoř metodu se jménem signálu (private void stačí), nezapomeň na vstupní parametr (lze najít v editoru u signálu)
-* udělej podmínku, že body je Player - nechceme útočit na ostatní enemies
-* zavolej hráči TakeDamage(damage)
-* nápověda:
-* vstupní parametr signálu je body, což je Node která vstoupila do hitboxu, body bude tím pádem player, ale abychom mohli zavolat jeho vnitřní metody, je třeba programu dát najevo, že body je player - provést explicitní konverzi typu. ([Datové typy](https://securoverse.com/csharp/data-types/data-types-overview))
+* Udělej podmínku, že body je Player - nechceme útočit na ostatní enemies
+* Zavolej hráči TakeDamage(damage)
+
+
+
+**Nápověda:**
+
+* Vstupní parametr signálu je body, což je Node která vstoupila do hitboxu, body bude tím pádem player, ale abychom mohli zavolat jeho vnitřní metody, je třeba programu dát najevo, že body je player - provést explicitní konverzi typu. ([Datové typy](https://securoverse.com/csharp/data-types/data-types-overview))
 
 
 
@@ -82,3 +87,43 @@
 * Hráč dostává damage, ale když mu klesne HP na 0 tak se nic nestane.
 * je to jednoduché, stačí přidat podmínku do TakeDamage, že když je HP 0, tak se IsDead nastaví na true.
 * Aby se hráč nemohl už pohybovat když je mrtvý, přidej na začátek PhysicsProcess check na IsDead, pokud je true => return
+
+
+
+##### Úkol #4 - Knockback hráče
+
+* Přidáme si i nějaký knockback co hráč dostane při zásahu Enemy.
+* Nejjednodušší způsob bude zase vytvořit metodu ve skriptu hráče, kterou prostě zavoláme při zásahu. Zkus na to přijít sám, je to skoro stejné jako TakeDamage.
+* Knockback můžeš udělat například tak, že hráči přidáš Velocity v opačném směru než je Enemy.
+
+
+
+**Nápověda:**
+
+* Velocity nemůžeš jen tak nastavit kdekoliv, protože se zpracovává pouze při MoveAndSlide.
+* Tip: udělej si pro aplikaci knockbacku proměnnou, kterou pak přidáš k Velocity těsně před zavoláním MoveAndSlide.
+
+
+
+##### Úkol #5 - Game over screen
+
+* Teď můžou Enemies krásně hráče šikanovat, ale chtělo by to i nějaké menu pro Game over.
+* Na UI se zpravidla využívá CanvasLayer - vykresluje se nezávisle na herní scéně. ([CanvasLayer](https://docs.godotengine.org/en/stable/tutorials/2d/canvas_layers.html))
+* V editoru vytvoř novou scene typu CanvasLayer. Pojmenuj ji HUD.
+* Přidej Control jako child, pojmenuj to GameOver. To bude naše screen pro smrt a restart.
+* Pod GameOver přidej ColorRect, Label a Button.
+* U ColorRect můžeš v menu nahoře uprostřed vidět ikonku kotvy a vedle toho takové zelené kolečko (Anchor preset). Rozbal nabídku kolečka a zvol plný bílý čtverec (Full rect). To způsobí, že se ColorRect roztáhne přes celou obrazovku.
+* ColorRect má property Color, Tak tam nastav libovolnou barvu. Hodí se ji udělat částečně průhlednou (A hodnota).
+* Dál nastav u labelu ať je uprostřed obrazovky (opět zelené kolečko, vyber vhodnou možnost). Dej Labelu text "Game over". v label settings můžeš zvolit new LabelSettings, na které když pak poklepeš tak se ti zobrazí možnosti editace fontu apod.
+* Na závěr ještě zvol u button Anchor preset na Bottom Wide, a dej mu text "Try Again".
+* Font size buttonu můžeš nastavit v odrážce Theme Overrides > Font Sizes.
+
+
+
+* Vytvoř nový skript pro HUD.
+* přidej mu pomocí \[Export] proměnnou obsahující GameOver node (typ proměnné Control)
+* V metodě \_Ready nastav viditelnost GameOver na false (\_gameOver.Visible)
+* Pak vytvoř metodu jménem PlayerDied, kde jenom nastav viditelnost GameOver na true.
+* Ještě je třeba spojit button pro TryAgain. Přidej signál pro pressed() z button do HUD a přidej ve skriptu signálovou metodu.
+* V metodě napiš jediný řádek: **GetTree().ChangeSceneToFile("res://Scenes/world.tscn");**
+* Co to je? To jednoduše načte root node znovu, což udělá to samé jako kdybychom hru vypli a zapli, efektivně tak hru restartujeme.
