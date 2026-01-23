@@ -29,20 +29,23 @@ public partial class Gun : Node2D
         // Delta = čas v sekundách mezi jednotlivými frames (nižší framerate => větší delta)
         _timeSinceLastShot += delta;
         
-        // To do: přidat Input pro shoot
-        if (Input.IsActionJustPressed("shoot") && _timeSinceLastShot >= _shootingDelay)
+        // To do: přidat do podmínky Input pro shoot + zavolat výstřel
+        if (_timeSinceLastShot >= _shootingDelay)
         {
-            Shoot();
             _timeSinceLastShot = 0;
         }
     }
-
+    
     private void Shoot()
     {
+        // Načte Scene ze souboru uloženého v BulletScenePath
         var bulletScene = GD.Load<PackedScene>(BulletScenePath);
+        // Vytvoříme instanci třídy (scény)
         var bulletInstance = bulletScene.Instantiate<Bullet>();
+        // Dáme instanci naši pozici a směr letu
         bulletInstance.GlobalPosition = GlobalPosition;
         bulletInstance.FiringDirection = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+        // Na závěr musíme instanci přidat jako potomka do struktury všech nodes
         _bulletController.AddChild(bulletInstance);
     }
 }

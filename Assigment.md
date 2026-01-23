@@ -127,3 +127,26 @@
 * Ještě je třeba spojit button pro TryAgain. Přidej signál pro pressed() z button do HUD a přidej ve skriptu signálovou metodu.
 * V metodě napiš jediný řádek: **GetTree().ChangeSceneToFile("res://Scenes/world.tscn");**
 * Co to je? To jednoduše načte root node znovu, což udělá to samé jako kdybychom hru vypli a zapli, efektivně tak hru restartujeme.
+
+
+
+##### Úkol #6 - Střelba
+
+* hráč se potřebuje proti Enemies nějak bránit!
+* Vytvoř novou scene s Node2D, kterou pojmenuj Gun.
+* Nebudeme to mít nějak složité, přidej pak jenom Sprite2D pro texturu (nějakou si nakresli).
+* Přidej skript ke zbrani. Už je vytvořený, najdeš ho ve Scripts pod jménem Gun.cs.
+* 
+* Budeme potřebovat pár proměnných: floaty ShootingDelay a timeSinceLastShot, a ještě string BulletScenePath, kam rovnou přiřadíš cestu k Bullet scene, kterou vytvoříš za chvíli.
+* V metodě process zavolej na začátku Godotí funkci jménem LookAt(*pozice*). Tato funkce natočí Gun tak, aby se dívala na pozici, kterou zadáme jako vstupní parametr. No a jasně, že jako pozici tam dáme pozici myši (GetGlobalMousePosition).
+* Dále chceme nějaký delay mezi výstřely, ať hráč nemá minigun. K tomu vytvoříme improvizovaný timer (efektivnější než Timer node, protože je úspornější pro paměť). K tomu použijeme timeSinceLastShot, který bude postupně narůstat dokud se nesplní podmínka. Pak ho zase vynulujeme a vyresetujeme tak timer.
+* Na závěr chceme v \_Process kontrolovat, jestli hráč zmáčkl akci na shoot a taky jestli delay mezi výstřely byl dostatečný. Ke kontrole inputu slouží třída Input. Přidej do podmínky: Input.IsActionJustPressed("shoot"). Ještě je třeba namapovat shoot v Input Map v editoru na levé tlačítko myši (nebo cokoliv čím má hráč střílet).
+* Metodu shoot jsem už vypracoval, přečti si komentáře abys pochopil co se tam děje.
+* Ještě musíme přidat Bullet Scene aby vše fungovalo.
+
+
+
+##### Úkol #7 - Náboje
+
+
+

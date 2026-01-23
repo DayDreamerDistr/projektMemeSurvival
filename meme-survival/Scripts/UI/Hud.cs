@@ -21,7 +21,7 @@ public partial class Hud : CanvasLayer
 
     private void TryAgainButtonPressed()
     {
-        _gameOverMenu.Visible = false;
+        //_gameOverMenu.Visible = false;
         GetTree().ChangeSceneToFile("res://Scenes/world.tscn");
     }
 
