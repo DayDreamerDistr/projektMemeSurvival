@@ -143,10 +143,11 @@
 * Na závěr chceme v \_Process kontrolovat, jestli hráč zmáčkl akci na shoot a taky jestli delay mezi výstřely byl dostatečný. Ke kontrole inputu slouží třída Input. Přidej do podmínky: Input.IsActionJustPressed("shoot"). Ještě je třeba namapovat shoot v Input Map v editoru na levé tlačítko myši (nebo cokoliv čím má hráč střílet).
 * Metodu shoot jsem už vypracoval, přečti si komentáře abys pochopil co se tam děje.
 * Ještě musíme přidat Bullet Scene aby vše fungovalo.
-
+* aby hráč nemohl používat zbraň po smrti, přidej kontrolu jestli je hráč IsDead na začátku _Process. Nápověda: potřebuješ referenci na Player node.
 
 
 ##### Úkol #7 - Náboje
+* Vytvoř si novou scene - Bullet. Udělej Bullet typu Area2D, to nám stačí.
 
 
 
