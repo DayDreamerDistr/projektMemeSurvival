@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace MemeSurvival.Scripts;
 	
@@ -28,4 +29,20 @@ public partial class BasicEnemy : CharacterBody2D
 
         MoveAndSlide();
     }
+    
+    /*public async Task FlashRed()
+    {
+        // Zapne shader flash
+        _shaderMaterial.SetShaderParameter("active", true);
+
+        // delay aby byl vidět flash
+        await Task.Delay(100);
+
+        // Vypne flash
+        // Kontrola zda je instance stále platná (mohla být mezitím smazána)
+        if (IsInstanceValid(this))
+        {
+            _shaderMaterial.SetShaderParameter("active", false);
+        }
+    }*/
 }

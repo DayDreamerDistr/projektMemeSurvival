@@ -7,11 +7,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_62su4"]
 radius = 13.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp7c0"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7xc3"]
 shader = ExtResource("2_b7xc3")
 shader_parameter/active = false
-shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aeph"]
 radius = 21.023796
@@ -26,7 +25,7 @@ z_index = 1
 shape = SubResource("CircleShape2D_62su4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_hp7c0")
+material = SubResource("ShaderMaterial_b7xc3")
 texture = ExtResource("1_lns33")
 
 [node name="Hitbox" type="Area2D" parent="."]

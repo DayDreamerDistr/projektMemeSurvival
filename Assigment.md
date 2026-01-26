@@ -130,7 +130,7 @@
 
 
 
-##### Úkol #6 - Střelba
+##### Úkol #6 - Zbraň
 
 * hráč se potřebuje proti Enemies nějak bránit!
 * Vytvoř novou scene s Node2D, kterou pojmenuj Gun.
@@ -143,11 +143,40 @@
 * Na závěr chceme v \_Process kontrolovat, jestli hráč zmáčkl akci na shoot a taky jestli delay mezi výstřely byl dostatečný. Ke kontrole inputu slouží třída Input. Přidej do podmínky: Input.IsActionJustPressed("shoot"). Ještě je třeba namapovat shoot v Input Map v editoru na levé tlačítko myši (nebo cokoliv čím má hráč střílet).
 * Metodu shoot jsem už vypracoval, přečti si komentáře abys pochopil co se tam děje.
 * Ještě musíme přidat Bullet Scene aby vše fungovalo.
-* aby hráč nemohl používat zbraň po smrti, přidej kontrolu jestli je hráč IsDead na začátku _Process. Nápověda: potřebuješ referenci na Player node.
+* aby hráč nemohl používat zbraň po smrti, přidej kontrolu jestli je hráč IsDead na začátku \_Process. Nápověda: potřebuješ referenci na Player node.
+
 
 
 ##### Úkol #7 - Náboje
+
 * Vytvoř si novou scene - Bullet. Udělej Bullet typu Area2D, to nám stačí.
+* Přidej mu collider a sprite. Zkus mu určit takovou velikost, aby vypadal jako bullet z pistole, ne jako cannon ball XD.
+* Přidej bulletu skript. Ke skriptu připoj signál body\_entered z té samé Node. (takže signál samo na vlastní skript)
+* Přidej do bulletu proměnné pro damage, směr letu a rychlost náboje.
+* Skoč do enemy skriptu, kde vytvoříš metodu TakeDamage. Můžeš ji udělat prakticky stejnou jako u hráče.
+* Vytvoř metodu pro signál na body\_entered a získej body ze vstupního parametru. Udělej kontrolu, že body je Enemy, přetypuj a zavolej enemy.TakeDamage.
+* Jako poslední přidej na konec signálu QueueFree(); - To odstraní bullet, protože už narazil do Enemy.
+* Teď ještě přejdi v Editoru do filesystému (tam kde máš zobrazenou strukturu projektu) a klikni pravým tlačítkem na bullet.tscn a zvol Copy Path. To zkopíruje cestu ke scéně. Přiřaď to k BulletScenePath proměnné ve skriptu Gun.cs.
 
 
 
+##### Úkol #8 - Střílení
+
+* Když voláš u spoustu Nodes \_Process a \_PhysicsProcess, tak to může být pro engine náročné. Proto si ve World přidáme Node2D, kterou pojmenujeme BulletController. Dej si pozor aby to bylo child pouze root node, ne třeba Playera.
+* K BulletController připoj skript. Je již vytvořený, Scripts > BulletController.
+* Jen si prohlédni co tam dělám, není to nic složitého.
+* Nyní je třeba ještě spawnout Bullet při výstřelu.
+* Ve skriptu Gun.cs již máme připravenou metodu shoot. Přidej proměnnou \_bulletController a v \_Ready odkomentuj přiřazení node.
+* Následně odkomentuj všechen kód (ne komentáře) v metodě Shoot a zkus pochopit co tam dělám.
+* Teď by mělo střílení fungovat. Vyzkoušej.
+
+
+
+##### Úkol #9 - Damage indicator
+
+* Bylo by fajn aby měl hráč nějaký response na to když enemy dostane zásah.
+* Když půjdeš do Scene BasicEnemy, klikneš na Sprite2D a přejdeš k properties, tak tam můžeš najít odrážku material.
+* Přidej nový ShaderMaterial a klikni na něj, aby si zobrazil jeho vlastnosti.
+* Ještě musíš přidat samotný shader. Zvol Load a vyber jediný shader v našem projektu (Shaders > BasicEnemy.gdshader)
+* Teď je třeba ve skriptu Enemy přidat metodu pro spuštění Shaderu. Už tam je, tak si přečti co se tam děje, kdybys nevěděl co je async tak mi radši napiš.
+* Teď už jenom metodu FlashRed zavolej pokaždé když dostane Enemy zásah (nápověda: Bullet.cs)
